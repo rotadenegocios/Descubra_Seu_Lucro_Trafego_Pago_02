@@ -29,7 +29,7 @@ export function Hero({ page, onOpen }) {
             <Cta label={hero.cta} source="hero" onOpen={onOpen} />
             <a className="cta cta--secondary" href={hero.secondaryHref}>
               <span>{hero.secondaryCta}</span>
-              <span aria-hidden="true">â†“</span>
+              <span aria-hidden="true"></span>
             </a>
           </div>
 
