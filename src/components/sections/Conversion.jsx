@@ -113,7 +113,7 @@ export function Authority({ page }) {
               ))}
             </ul>
             <a className="authority-whatsapp" href={page.whatsapp} target="_blank" rel="noreferrer">
-              {authority.whatsappLabel} â†’
+              {authority.whatsappLabel}
             </a>
           </div>
         </div>
