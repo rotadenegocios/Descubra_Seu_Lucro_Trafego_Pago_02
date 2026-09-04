@@ -1,0 +1,64 @@
+// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+import { currentCtaSource, markLeadSubmitted, reportExit, resetForPage } from './behavior.js'
+import { track } from './client.js'
+import { config } from './config.js'
+
+export { track, getContext, startTracking } from './client.js'
+export { TrackingProvider, useTracking } from './react.jsx'
+export { PrivacyBar } from './PrivacyBar.jsx'
+export { PrivacyNotice } from './PrivacyNotice.jsx'
+export { getConsent, setConsent, hasDecision } from './consent.js'
+export { isOptedOut, setOptOut } from './optout.js'
+export { config } from './config.js'
+export { resolveApiPath } from './apiPath.js'
+
+// Chamado por paginas que trocam de rota sem recarregar (SPA). Fecha a
+// medicao da rota anterior e comeca a da nova.
+export function trackPageChange({ itemId = '', itemName = '' } = {}) {
+  if (!config.enabled) return
+
+  reportExit('navigation')
+  resetForPage({ itemId: itemId || config.siteId, itemName })
+
+  track('page_view', {
+    page_path: window.location.pathname,
+    page_location: window.location.href,
+    referrer: document.referrer,
+  })
+}
+
+// Chamado pelo modal quando o POST /api/leads responde 201.
+export function trackLead({ itemId, itemName, ctaSource, email, phone }) {
+  markLeadSubmitted()
+
+  track(
+    'generate_lead',
+    { cta_source: ctaSource || currentCtaSource(), item_id: itemId, item_name: itemName },
+    {
+      metaParams: { content_ids: [itemId], content_name: itemName, content_type: 'product' },
+      userData: { email, phone },
+    },
+  )
+}
+
+// Chamado imediatamente antes do redirecionamento para o checkout.
+export function trackBeginCheckout({ itemId, itemName, checkoutUrl, ctaSource }) {
+  let checkoutHost = ''
+
+  try {
+    checkoutHost = new URL(checkoutUrl).hostname
+  } catch {
+    checkoutHost = ''
+  }
+
+  track(
+    'begin_checkout',
+    {
+      item_id: itemId,
+      item_name: itemName,
+      checkout_host: checkoutHost,
+      cta_source: ctaSource || currentCtaSource(),
+    },
+    { metaParams: { content_ids: [itemId], content_name: itemName, content_type: 'product' } },
+  )
+}

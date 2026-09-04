@@ -1,0 +1,94 @@
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.status-mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.12rem;
+  border-radius: 999px;
+  color: var(--on-accent);
+  background: var(--green);
+}
+
+.status-mark--negative {
+  color: #2a0808;
+  background: var(--danger);
+}
+
+.status-mark svg {
+  width: 0.72rem;
+  height: 0.72rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.95rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cta--primary {
+  color: var(--on-accent);
+  background: var(--gradient);
+  box-shadow: 0 0.6rem 1.6rem rgba(60, 254, 174, 0.22);
+}
+
+.cta--secondary {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+.cta--ghost {
+  padding: 0.6rem 1.15rem;
+  color: var(--on-accent);
+  background: var(--green);
+  font-size: 0.9rem;
+}
+
+.cta:hover {
+  transform: translateY(-0.1rem);
+}
+
+.cta--primary:hover {
+  box-shadow: 0 0.8rem 2rem rgba(25, 157, 246, 0.3);
+}
+
+.cta--secondary:hover {
+  border-color: var(--green);
+}
+
+.cta:active {
+  transform: none;
+}
+
+.cta--block {
+  width: 100%;
+}

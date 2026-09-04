@@ -1,0 +1,134 @@
+.hero-section {
+  position: relative;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem);
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: -12rem 0 auto;
+  height: 34rem;
+  background:
+    radial-gradient(38rem 22rem at 22% 30%, rgba(60, 254, 174, 0.16), transparent 70%),
+    radial-gradient(34rem 20rem at 78% 20%, rgba(25, 157, 246, 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.hero__headline {
+  font-size: clamp(2.05rem, 5.2vw, 3.35rem);
+}
+
+.hero__headline em {
+  font-style: normal;
+  background: var(--gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero__lead {
+  max-width: 46ch;
+  margin-top: 1.1rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+}
+
+.hero__promises {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.hero__promises li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.9rem;
+}
+
+.hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin-top: 1.6rem;
+  color: var(--muted);
+}
+
+.hero__trust li {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.hero__trust .icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--blue);
+}
+
+.hero__product-mockup {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(60, 254, 174, 0.13), rgba(25, 157, 246, 0.12));
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+}
+
+.hero__product-mockup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.hero__product-mockup img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+@media (max-width: 62rem) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__lead,
+  .hero__promises {
+    max-width: none;
+  }
+
+  .hero__product-mockup {
+    max-width: 38rem;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 30rem) {
+  .hero__actions .cta {
+    width: 100%;
+  }
+}
