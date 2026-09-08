@@ -1,5 +1,4 @@
 import React from 'react'
-import dashboardMockup from '../../../assets/descubra-seu-lucro-dashboard-mockup.png'
 import { Cta, Icon, StatusMark } from '../ui/ui.jsx'
 import './Hero.css'
 
@@ -44,9 +43,14 @@ export function Hero({ page, onOpen }) {
         </div>
 
         <figure className="hero__product-mockup">
-          <img
-            src={dashboardMockup}
-            alt="Painel financeiro do Método Descubra Seu Lucro em notebook e celular"
+          <iframe
+            src={hero.videoEmbedUrl}
+            title={hero.videoTitle || 'Descubra Seu Lucro'}
+            loading="eager"
+            scrolling="no"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
           />
         </figure>
       </div>
