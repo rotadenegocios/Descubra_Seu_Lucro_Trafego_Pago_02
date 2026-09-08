@@ -1,41 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Cta, Icon, Reveal, SectionHead, StatusMark } from '../ui/ui.jsx'
 import { businessInfo } from '../../config/content.js'
-
-// Fachada do YouTube: a miniatura carrega no lugar do iframe e o player so entra
-// depois do clique. Tres iframes no primeiro paint custariam caro no mobile.
-function VideoFacade({ video }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  if (isPlaying) {
-    return (
-      <div className="video-card">
-        <iframe
-          src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&autoplay=1`}
-          title={video.title}
-          referrerPolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
-      </div>
-    )
-  }
-
-  return (
-    <button type="button" className="video-card video-card--facade" onClick={() => setIsPlaying(true)}>
-      <img
-        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-        alt={video.title}
-        loading="lazy"
-        decoding="async"
-      />
-      <span className="video-card__play" aria-hidden="true">
-        â–¶
-      </span>
-      <span className="video-card__label">{video.title}</span>
-    </button>
-  )
-}
 
 export function Proof({ page }) {
   const { proof } = page
@@ -52,7 +17,16 @@ export function Proof({ page }) {
 
         <div className="video-grid">
           {proof.videos.map((video) => (
-            <VideoFacade video={video} key={video.id} />
+            <div className="video-card" key={video.id}>
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0`}
+                title={video.title}
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
           ))}
         </div>
 
@@ -141,7 +115,6 @@ export function Offer({ page, onOpen }) {
                 </li>
               ))}
             </ul>
-            <p className="offer-card__condition">{offer.condition}</p>
           </div>
 
           <div className="offer-card__action">

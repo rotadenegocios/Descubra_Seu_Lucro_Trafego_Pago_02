@@ -151,15 +151,14 @@ export function Board({ page }) {
                 </tr>
               </thead>
               <tbody>
-                {board.rows.map(([name, cost, today, minimum, status]) => (
+                {board.rows.map(([name, value, reading, status]) => (
                   <tr key={name}>
                     <td>{name}</td>
-                    <td>{cost}</td>
-                    <td>{today}</td>
-                    <td>{minimum}</td>
+                    <td>{value}</td>
+                    <td>{reading}</td>
                     <td>
                       <span className={`tag tag--${status}`}>
-                        {board.legend.find(([key]) => key === status)?.[1]}
+                        {board.legend.find(([key]) => key === status)?.[1] || status}
                       </span>
                     </td>
                   </tr>
@@ -207,13 +206,15 @@ export function Where({ page }) {
 
         <div className="where-grid where-grid--top">{renderCards(topItems)}</div>
 
-        <div className="where-gallery">
-          {where.images.map(([src, alt], index) => (
-            <Reveal className="where-shot" key={src} delay={index * 70}>
-              <img src={src} alt={alt} loading="lazy" decoding="async" />
-            </Reveal>
-          ))}
-        </div>
+        {where.images?.length ? (
+          <div className="where-gallery">
+            {where.images.map(([src, alt], index) => (
+              <Reveal className="where-shot" key={src} delay={index * 70}>
+                <img src={src} alt={alt} loading="lazy" decoding="async" />
+              </Reveal>
+            ))}
+          </div>
+        ) : null}
 
         <div className="where-grid where-grid--bottom">{renderCards(bottomItems, 3)}</div>
       </div>
