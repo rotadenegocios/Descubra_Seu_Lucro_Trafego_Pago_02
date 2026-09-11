@@ -1,7 +1,8 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 // Nome GA4 -> nome Meta. Eventos ausentes deste mapa vao so para o GA4.
 export const META_EVENTS = Object.freeze({
   page_view: 'PageView',
+  scroll_depth: 'PageScroll',
   view_item: 'ViewContent',
   cta_click: 'CTAClick',
   generate_lead: 'Lead',

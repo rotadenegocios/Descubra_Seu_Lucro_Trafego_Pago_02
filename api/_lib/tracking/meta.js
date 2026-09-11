@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { createHash } from 'node:crypto'
 
 const GRAPH_VERSION = 'v21.0'
@@ -6,6 +6,7 @@ const TIMEOUT_MS = 5000
 
 const META_EVENT_NAMES = {
   page_view: 'PageView',
+  scroll_depth: 'PageScroll',
   view_item: 'ViewContent',
   cta_click: 'CTAClick',
   generate_lead: 'Lead',
@@ -36,7 +37,9 @@ function pickCustomData(params = {}) {
     'cta_source',
     'item_id',
     'item_name',
+    'percent_scrolled',
     'site_id',
+    'time_to_reach_ms',
     'variante',
   ]
 

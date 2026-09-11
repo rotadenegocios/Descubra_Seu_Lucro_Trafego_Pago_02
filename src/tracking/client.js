@@ -1,7 +1,7 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { config, debugLog } from './config.js'
 import { consentPayload, getConsent, onConsentChange } from './consent.js'
-import { ALLOWED_EVENTS, META_EVENTS } from './events.js'
+import { ALLOWED_EVENTS, META_EVENTS, STANDARD_META_EVENTS } from './events.js'
 import {
   getClickIds,
   getMetaIdentifiers,
@@ -98,8 +98,8 @@ function sendToMeta(entry) {
   const metaName = META_EVENTS[entry.name]
   if (!metaName) return
 
-  if (window.fbq) {
-    const method = metaName === 'CTAClick' ? 'trackCustom' : 'track'
+  if (entry.pixelEnabled && window.fbq) {
+    const method = STANDARD_META_EVENTS.includes(metaName) ? 'track' : 'trackCustom'
     window.fbq(method, metaName, entry.metaParams, { eventID: entry.event_id })
   }
 
@@ -149,6 +149,8 @@ export function track(name, params = {}, options = {}) {
       event_id: eventId,
       ts: Date.now(),
       urgent: Boolean(options.urgent) || Boolean(META_EVENTS[name]),
+      pixelEnabled: options.pixelEnabled !== false,
+      capiOnly: Boolean(options.capiOnly),
       params: {
         ...params,
         site_id: base.site_id,
@@ -161,8 +163,8 @@ export function track(name, params = {}, options = {}) {
 
     const consent = getConsent()
 
-    sendToOwnLog(entry)
-    if (consent.analytics) {
+    if (!entry.capiOnly) sendToOwnLog(entry)
+    if (!entry.capiOnly && consent.analytics) {
       sendToGa4(entry)
       pushToDataLayer(entry)
     }

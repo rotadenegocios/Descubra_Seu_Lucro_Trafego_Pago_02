@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { currentCtaSource, markLeadSubmitted, reportExit, resetForPage } from './behavior.js'
 import { track } from './client.js'
 import { config } from './config.js'
@@ -37,6 +37,8 @@ export function trackLead({ itemId, itemName, ctaSource, email, phone }) {
     {
       metaParams: { content_ids: [itemId], content_name: itemName, content_type: 'product' },
       userData: { email, phone },
+      pixelEnabled: false,
+      capiOnly: true,
     },
   )
 }

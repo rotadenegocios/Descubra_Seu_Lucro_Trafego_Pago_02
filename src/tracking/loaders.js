@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { config, debugLog } from './config.js'
 
 let gtagLoaded = false

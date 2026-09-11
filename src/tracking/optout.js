@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 // Direito de oposicao (LGPD art. 18). Quem opta por sair nao e medido por
 // nenhum canal, nem pelo log first-party que roda sob legitimo interesse.
 const OPTOUT_COOKIE = 'rn_optout'

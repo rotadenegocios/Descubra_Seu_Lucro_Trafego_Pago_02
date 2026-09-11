@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import React, { createContext, useContext, useEffect, useRef } from 'react'
 import { initBehavior } from './behavior.js'
 import { getContext, startTracking, track } from './client.js'

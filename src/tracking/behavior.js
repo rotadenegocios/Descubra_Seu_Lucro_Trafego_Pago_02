@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { track } from './client.js'
 
 const SCROLL_STEPS = [25, 50, 75, 90, 100]
@@ -55,7 +55,7 @@ function watchScroll() {
         track('scroll_depth', {
           percent_scrolled: step,
           time_to_reach_ms: Date.now() - state.startedAt,
-        })
+        }, { metaParams: { percent_scrolled: step } })
       }
     })
   }

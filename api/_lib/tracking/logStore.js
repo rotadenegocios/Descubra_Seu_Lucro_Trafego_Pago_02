@@ -1,4 +1,4 @@
-// Copia local do modulo de rastreio. Esta pagina nao usa o sync do _shared.
+// GERADO POR _shared/sync-tracking.mjs - NAO EDITE AQUI
 import { geoFromHeaders, parseUserAgent, pseudonymize, referrerDomain } from './visitor.js'
 
 const RETENTION_MONTHS = 12
