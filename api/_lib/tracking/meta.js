@@ -61,8 +61,12 @@ function list(value) {
 export async function sendMetaEvent({ event, clientIp, userAgent }) {
   const datasetIds = list(process.env.META_DATASET_ID)
   const tokens = list(process.env.META_CAPI_ACCESS_TOKEN)
+  const testEventCodes = list(process.env.META_TEST_EVENT_CODE)
 
   if (!datasetIds.length || !tokens.length) return { skipped: 'sem_credenciais' }
+  if (testEventCodes.length && testEventCodes.length !== datasetIds.length) {
+    return { skipped: 'codigo_de_teste_incompativel' }
+  }
 
   const eventName = metaEventName(event.event_name)
   if (!eventName) return { skipped: 'evento_nao_mapeado' }
@@ -92,7 +96,12 @@ export async function sendMetaEvent({ event, clientIp, userAgent }) {
 
   const results = await Promise.all(
     datasetIds.map((datasetId, index) =>
-      postToDataset({ datasetId, token: tokens[index] || tokens[0], eventPayload }),
+      postToDataset({
+        datasetId,
+        token: tokens[index] || tokens[0],
+        eventPayload,
+        testEventCode: testEventCodes[index],
+      }),
     ),
   )
 
@@ -100,12 +109,12 @@ export async function sendMetaEvent({ event, clientIp, userAgent }) {
   return failed.length ? { error: failed[0].error, sent: results.length - failed.length } : { ok: true }
 }
 
-async function postToDataset({ datasetId, token, eventPayload }) {
+async function postToDataset({ datasetId, token, eventPayload, testEventCode }) {
   const payload = {
     access_token: token,
     data: [eventPayload],
-    ...(process.env.META_TEST_EVENT_CODE
-      ? { test_event_code: process.env.META_TEST_EVENT_CODE }
+    ...(testEventCode
+      ? { test_event_code: testEventCode }
       : {}),
   }
 
